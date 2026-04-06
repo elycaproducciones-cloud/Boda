@@ -78,7 +78,7 @@ body {
   animation: fadeUp 1.2s ease forwards;
 }
 
-/* Título principal "Nuestra Boda" */
+/* Título principal */
 .main-title {
   font-family: 'Cinzel', serif;
   font-size: 1.8rem;
@@ -89,7 +89,7 @@ body {
   text-transform: uppercase;
 }
 
-/* Nombres de los novios - más pequeños y con orden: novia primero */
+/* Nombres de los novios */
 .names {
   font-family: 'Cinzel', serif;
   font-size: 2rem;
@@ -281,11 +281,19 @@ p {
   letter-spacing: 1px;
 }
 
-.floral-icon {
-  font-size: 1.6rem;
+/* Icono decorativo de corazones (en lugar de hojas) */
+.heart-icon {
+  font-size: 1.8rem;
   color: var(--gold);
-  opacity: 0.6;
+  opacity: 0.7;
   margin: 10px 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 0.5; }
 }
 
 @keyframes fadeUp {
@@ -310,6 +318,7 @@ p {
   .romantic-phrase { font-size: 0.9rem; }
   .date-large { font-size: 1rem; letter-spacing: 4px; }
   .music-control { bottom: 18px; right: 18px; padding: 10px 16px; }
+  .heart-icon { font-size: 1.3rem; }
 }
 </style>
 </head>
@@ -321,15 +330,15 @@ p {
   <span class="music-text" id="musicStatusText">Activar música</span>
 </div>
 
-<audio id="bgAudio" loop preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_8b4c2c9b2c.mp3?filename=romantic-piano-185092.mp3" type="audio/mpeg">
+<audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8b6b4c1.mp3?filename=romantic-piano-143176.mp3" type="audio/mpeg">
 </audio>
 
 <!-- PORTADA -->
 <section class="section">
   <div class="bg" style="background-image:url('https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 25%;"></div>
   <div class="content">
-    <div class="floral-icon"><i class="fas fa-feather-alt"></i></div>
+    <div class="heart-icon"><i class="fas fa-heart"></i></div>
     <div class="main-title">Nuestra Boda</div>
     <div class="names">
       <span class="bride">Elizabeth</span>
@@ -383,22 +392,38 @@ p {
   </div>
 </section>
 
-<!-- CONFIRMACIÓN -->
+<!-- CONFIRMACIÓN con mensaje personalizado de WhatsApp -->
 <section class="section">
   <div class="bg" style="background-image:url('https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 50%;"></div>
   <div class="content">
     <h2><i class="fas fa-heart"></i> Confirma tu asistencia</h2>
     <div class="romantic-phrase">«Tu presencia es el mejor regalo que podemos recibir»</div>
-    <p>Será un honor compartir este día tan especial contigo.<br>Confírmame tu llegada y sé parte de nuestro sueño.</p>
+    <p>Será un honor compartir este día tan especial contigo.<br>Confirma tu llegada y sé parte de nuestro sueño.</p>
     <div class="divider"></div>
-    <p style="font-size:0.95rem;"><i class="fas fa-calendar-check"></i> ¡Te esperamos con los brazos abiertos!</p>
-    <a class="btn" href="https://api.whatsapp.com/send?phone=5215516074050&text=Confirmo%20mi%20asistencia%20a%20su%20boda" target="_blank">
+    
+    <!-- Selector de número de personas -->
+    <div style="margin: 1rem 0;">
+      <label style="color: var(--gold); font-size: 0.9rem; display: block; margin-bottom: 8px;">
+        <i class="fas fa-users"></i> ¿Cuántas personas asistirán?
+      </label>
+      <select id="guestCount" style="background: rgba(10,26,47,0.9); color: white; border: 1px solid var(--gold); border-radius: 50px; padding: 10px 20px; font-size: 1rem; cursor: pointer; font-family: 'Montserrat', sans-serif;">
+        <option value="1">1 persona</option>
+        <option value="2" selected>2 personas</option>
+        <option value="3">3 personas</option>
+        <option value="4">4 personas</option>
+        <option value="5">5 personas</option>
+        <option value="6">6 personas</option>
+      </select>
+    </div>
+    
+    <a class="btn" id="whatsappBtn" href="#" target="_blank">
       <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
     </a>
     
     <!-- Frase de cierre elegante -->
     <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.85; border-top: 1px solid rgba(228,179,99,0.3); padding-top: 1.2rem;">
-      <i class="fas fa-infinity"></i> “Y así, entre promesas y sueños, comienza la historia más hermosa”
+      <i class="fas fa-heart"></i> <i class="fas fa-heart"></i> <i class="fas fa-heart"></i>
+      <p style="margin-top: 8px;">“Y así, entre promesas y sueños, comienza la historia más hermosa”</p>
     </div>
   </div>
 </section>
@@ -432,7 +457,7 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ======================== MÚSICA ========================
+// ======================== MÚSICA (CORREGIDA) ========================
 const audio = document.getElementById('bgAudio');
 const musicToggle = document.getElementById('musicToggle');
 const musicIcon = document.getElementById('musicIcon');
@@ -481,6 +506,23 @@ function onFirstInteraction() {
 }
 document.addEventListener('click', onFirstInteraction);
 document.addEventListener('touchstart', onFirstInteraction);
+
+// ======================== WHATSAPP CON NÚMERO DE PERSONAS ========================
+const phoneNumber = "5215516074050";
+const guestSelect = document.getElementById('guestCount');
+const whatsappBtn = document.getElementById('whatsappBtn');
+
+function updateWhatsAppLink() {
+  const guestCount = guestSelect.value;
+  const message = `Confirmo mi asistencia a su boda, me acompañarán ${guestCount} personas`;
+  const encodedMessage = encodeURIComponent(message);
+  whatsappBtn.href = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+}
+
+// Actualizar el enlace cuando cambie el número de personas
+guestSelect.addEventListener('change', updateWhatsAppLink);
+// Inicializar el enlace al cargar la página
+updateWhatsAppLink();
 
 // ======================== FRASES ROTATIVAS ========================
 const lovePhrases = [

@@ -53,6 +53,11 @@ body {
   background-position: center;
   filter: brightness(0.4) contrast(1.1);
   z-index: 0;
+  transition: transform 0.5s ease;
+}
+
+.section:hover .bg {
+  transform: scale(1.02);
 }
 
 .section::after {
@@ -76,6 +81,12 @@ body {
   border: 1px solid rgba(228, 179, 99, 0.4);
   box-shadow: 0 30px 50px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(228,179,99,0.1) inset;
   animation: fadeUp 1.2s ease forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 35px 55px -20px rgba(0,0,0,0.7);
 }
 
 /* Título principal */
@@ -163,6 +174,12 @@ p {
   margin: 1rem 0;
   display: inline-block;
   backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.location-detail:hover {
+  background: rgba(228, 179, 99, 0.2);
+  transform: scale(1.02);
 }
 
 .location-detail strong {
@@ -229,6 +246,12 @@ p {
   border-radius: 24px;
   min-width: 100px;
   border-bottom: 3px solid var(--gold);
+  transition: all 0.3s ease;
+}
+
+.countdown div:hover {
+  transform: translateY(-5px);
+  border-bottom-color: var(--gold-light);
 }
 
 .countdown span {
@@ -247,41 +270,60 @@ p {
   opacity: 0.8;
 }
 
-/* Control de música */
-.music-control {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 999;
-  background: rgba(10, 26, 47, 0.95);
-  backdrop-filter: blur(12px);
-  border-radius: 60px;
-  padding: 14px 22px;
-  cursor: pointer;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-  border: 1px solid var(--gold);
-  transition: all 0.2s;
+/* Estilos para el itinerario */
+.itinerary-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.itinerary-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 1.2rem;
+  background: rgba(10, 26, 47, 0.5);
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+  transition: all 0.3s ease;
+  border-left: 3px solid var(--gold);
 }
 
-.music-control:hover {
-  transform: scale(1.05);
-  background: var(--blue-mid);
+.itinerary-item:hover {
+  background: rgba(228, 179, 99, 0.1);
+  transform: translateX(8px);
 }
 
-.music-control i {
-  font-size: 1.6rem;
+.itinerary-time {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
   color: var(--gold);
+  min-width: 100px;
 }
 
-.music-control .music-text {
+.itinerary-time i {
+  margin-right: 8px;
+  font-size: 1rem;
+}
+
+.itinerary-details {
+  flex: 1;
+}
+
+.itinerary-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+}
+
+.itinerary-desc {
   font-size: 0.85rem;
-  letter-spacing: 1px;
+  opacity: 0.8;
 }
 
-/* Icono decorativo de corazones (en lugar de hojas) */
+/* Icono decorativo de corazones */
 .heart-icon {
   font-size: 1.8rem;
   color: var(--gold);
@@ -307,6 +349,22 @@ p {
   }
 }
 
+/* Animación de entrada para elementos */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Decoración adicional */
+.floating-hearts {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  pointer-events: none;
+  opacity: 0.3;
+  font-size: 0.8rem;
+}
+
 @media (max-width: 650px) {
   .main-title { font-size: 1.2rem; letter-spacing: 5px; }
   .names { font-size: 1.5rem; letter-spacing: 2px; }
@@ -317,22 +375,18 @@ p {
   .content { padding: 1.8rem; margin: 0 1rem; }
   .romantic-phrase { font-size: 0.9rem; }
   .date-large { font-size: 1rem; letter-spacing: 4px; }
-  .music-control { bottom: 18px; right: 18px; padding: 10px 16px; }
   .heart-icon { font-size: 1.3rem; }
+  .itinerary-item { flex-direction: column; text-align: center; gap: 0.5rem; }
+  .itinerary-time { min-width: auto; }
 }
 </style>
 </head>
 <body>
 
-<!-- BOTÓN DE MÚSICA -->
-<div id="musicToggle" class="music-control">
-  <i id="musicIcon" class="fas fa-music"></i>
-  <span class="music-text" id="musicStatusText">Activar música</span>
+<!-- Decoración flotante -->
+<div class="floating-hearts">
+  <i class="fas fa-heart"></i> <i class="fas fa-heart"></i> <i class="fas fa-heart"></i>
 </div>
-
-<audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8b6b4c1.mp3?filename=romantic-piano-143176.mp3" type="audio/mpeg">
-</audio>
 
 <!-- PORTADA -->
 <section class="section">
@@ -345,7 +399,7 @@ p {
       <span class="ampersand">&</span>
       <span class="groom">Juan Carlos</span>
     </div>
-    <div class="romantic-phrase">«20 años despues seguimos eligiendonos cada día»</div>
+    <div class="romantic-phrase">«20 años después seguimos eligiéndonos cada día»</div>
     <div class="divider"></div>
     <p class="date-large">02 · MAYO · 2026</p>
     <div class="countdown">
@@ -363,7 +417,7 @@ p {
   <div class="bg" style="background-image:url('https://images.pexels.com/photos/2962393/pexels-photo-2962393.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 35%;"></div>
   <div class="content">
     <h2><i class="fas fa-church"></i> Ceremonia Religiosa</h2>
-    <div class="romantic-phrase">«"Cada instante contigo vale la eternidad"»</div>
+    <div class="romantic-phrase">«Cada instante contigo vale la eternidad»</div>
     <div class="location-detail">
       <strong>📍 Iglesia de La Magdalena</strong><br>
       5:00 PM · 2 de Mayo de 2026
@@ -372,6 +426,61 @@ p {
     <a class="btn" target="_blank" href="https://maps.app.goo.gl/rSNB29egkLX4B2sz9">
       <i class="fas fa-map-marker-alt"></i> Cómo llegar
     </a>
+  </div>
+</section>
+
+<!-- ITINERARIO (NUEVA SECCIÓN) -->
+<section class="section">
+  <div class="bg" style="background-image:url('https://images.pexels.com/photos/2609220/pexels-photo-2609220.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 45%;"></div>
+  <div class="content">
+    <h2><i class="fas fa-clock"></i> Itinerario</h2>
+    <div class="romantic-phrase">«Un día para recordar, cada momento para atesorar»</div>
+    
+    <div class="itinerary-container">
+      <div class="itinerary-item">
+        <div class="itinerary-time"><i class="fas fa-ring"></i> 5:00 PM</div>
+        <div class="itinerary-details">
+          <div class="itinerary-title">Ceremonia Religiosa</div>
+          <div class="itinerary-desc">Iglesia de La Magdalena · Recepción de invitados</div>
+        </div>
+      </div>
+      
+      <div class="itinerary-item">
+        <div class="itinerary-time"><i class="fas fa-champagne-glasses"></i> 6:30 PM</div>
+        <div class="itinerary-details">
+          <div class="itinerary-title">Cóctel de Bienvenida</div>
+          <div class="itinerary-desc">Jardín El Edén · Brindis y aperitivos</div>
+        </div>
+      </div>
+      
+      <div class="itinerary-item">
+        <div class="itinerary-time"><i class="fas fa-utensils"></i> 7:30 PM</div>
+        <div class="itinerary-details">
+          <div class="itinerary-title">Cena y Banquete</div>
+          <div class="itinerary-desc">Celebración con los mejores sabores</div>
+        </div>
+      </div>
+      
+      <div class="itinerary-item">
+        <div class="itinerary-time"><i class="fas fa-music"></i> 9:00 PM</div>
+        <div class="itinerary-details">
+          <div class="itinerary-title">Baile y Fiesta</div>
+          <div class="itinerary-desc">Música, baile y sorpresas hasta el final</div>
+        </div>
+      </div>
+      
+      <div class="itinerary-item">
+        <div class="itinerary-time"><i class="fas fa-cake-candles"></i> 11:00 PM</div>
+        <div class="itinerary-details">
+          <div class="itinerary-title">Pastel y Despedida</div>
+          <div class="itinerary-desc">Corte de pastel y brindis final</div>
+        </div>
+      </div>
+    </div>
+    
+    <p style="font-size: 0.85rem; margin-top: 1rem; opacity: 0.7;">
+      <i class="fas fa-hourglass-half"></i> Horarios sujetos a la ceremonia
+    </p>
   </div>
 </section>
 
@@ -392,7 +501,7 @@ p {
   </div>
 </section>
 
-<!-- CONFIRMACIÓN con mensaje personalizado de WhatsApp -->
+<!-- CONFIRMACIÓN -->
 <section class="section">
   <div class="bg" style="background-image:url('https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 50%;"></div>
   <div class="content">
@@ -406,7 +515,7 @@ p {
       <label style="color: var(--gold); font-size: 0.9rem; display: block; margin-bottom: 8px;">
         <i class="fas fa-users"></i> ¿Cuántas personas asistirán?
       </label>
-      <select id="guestCount" style="background: rgba(10,26,47,0.9); color: white; border: 1px solid var(--gold); border-radius: 50px; padding: 10px 20px; font-size: 1rem; cursor: pointer; font-family: 'Montserrat', sans-serif;">
+      <select id="guestCount" style="background: rgba(10,26,47,0.9); color: white; border: 1px solid var(--gold); border-radius: 50px; padding: 10px 20px; font-size: 1rem; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: all 0.3s ease;">
         <option value="1">1 persona</option>
         <option value="2" selected>2 personas</option>
         <option value="3">3 personas</option>
@@ -423,7 +532,7 @@ p {
     <!-- Frase de cierre elegante -->
     <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.85; border-top: 1px solid rgba(228,179,99,0.3); padding-top: 1.2rem;">
       <i class="fas fa-heart"></i> <i class="fas fa-heart"></i> <i class="fas fa-heart"></i>
-      <p style="margin-top: 8px;">“Y así, entre promesas y sueños continua la historia más hermosa”</p>
+      <p style="margin-top: 8px;">“Y así, entre promesas y sueños, continúa la historia más hermosa”</p>
     </div>
   </div>
 </section>
@@ -457,56 +566,6 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ======================== MÚSICA (CORREGIDA) ========================
-const audio = document.getElementById('bgAudio');
-const musicToggle = document.getElementById('musicToggle');
-const musicIcon = document.getElementById('musicIcon');
-const musicStatusText = document.getElementById('musicStatusText');
-let isPlaying = false;
-
-audio.volume = 0.3;
-audio.loop = true;
-audio.load();
-
-function playMusic() {
-  audio.play().then(() => {
-    isPlaying = true;
-    musicIcon.className = "fas fa-volume-up";
-    musicStatusText.innerText = "Sonando ♫";
-  }).catch((error) => {
-    console.log("Error:", error);
-    isPlaying = false;
-    musicIcon.className = "fas fa-music";
-    musicStatusText.innerText = "Activar música";
-  });
-}
-
-function stopMusic() {
-  audio.pause();
-  isPlaying = false;
-  musicIcon.className = "fas fa-music";
-  musicStatusText.innerText = "Activar música";
-}
-
-musicToggle.addEventListener('click', (e) => {
-  e.stopPropagation();
-  if (isPlaying) {
-    stopMusic();
-  } else {
-    playMusic();
-  }
-});
-
-let userInteracted = false;
-function onFirstInteraction() {
-  if (!userInteracted && !isPlaying) {
-    playMusic();
-    userInteracted = true;
-  }
-}
-document.addEventListener('click', onFirstInteraction);
-document.addEventListener('touchstart', onFirstInteraction);
-
 // ======================== WHATSAPP CON NÚMERO DE PERSONAS ========================
 const phoneNumber = "5215516074050";
 const guestSelect = document.getElementById('guestCount');
@@ -519,9 +578,7 @@ function updateWhatsAppLink() {
   whatsappBtn.href = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
 }
 
-// Actualizar el enlace cuando cambie el número de personas
 guestSelect.addEventListener('change', updateWhatsAppLink);
-// Inicializar el enlace al cargar la página
 updateWhatsAppLink();
 
 // ======================== FRASES ROTATIVAS ========================
@@ -549,6 +606,34 @@ setInterval(() => {
     }
   }
 }, 8000);
+
+// ======================== ANIMACIÓN AL SCROLL ========================
+const observerOptions = { threshold: 0.2 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.itinerary-item, .location-detail, .countdown div').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+// Forzar visibilidad inicial de algunos elementos
+setTimeout(() => {
+  document.querySelectorAll('.itinerary-item, .location-detail, .countdown div').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }
+  });
+}, 100);
 </script>
 </body>
 </html>

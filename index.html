@@ -1,5 +1,4 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -54,7 +53,6 @@ body {
   background-position: center;
   filter: brightness(0.4) contrast(1.1);
   z-index: 0;
-  transition: transform 0.4s ease;
 }
 
 .section::after {
@@ -71,8 +69,8 @@ body {
   z-index: 10;
   max-width: 750px;
   width: 100%;
-  background: rgba(5, 13, 24, 0.65);
-  backdrop-filter: blur(8px);
+  background: rgba(5, 13, 24, 0.7);
+  backdrop-filter: blur(10px);
   border-radius: 48px;
   padding: 2.5rem 2rem;
   border: 1px solid rgba(228, 179, 99, 0.4);
@@ -209,7 +207,6 @@ p {
   border-radius: 24px;
   min-width: 100px;
   border-bottom: 3px solid var(--gold);
-  transition: 0.2s;
 }
 
 .countdown span {
@@ -228,13 +225,13 @@ p {
   opacity: 0.8;
 }
 
-/* Control de música mejorado */
+/* Control de música */
 .music-control {
   position: fixed;
   bottom: 30px;
   right: 30px;
   z-index: 999;
-  background: rgba(10, 26, 47, 0.9);
+  background: rgba(10, 26, 47, 0.95);
   backdrop-filter: blur(12px);
   border-radius: 60px;
   padding: 14px 22px;
@@ -262,7 +259,6 @@ p {
   letter-spacing: 1px;
 }
 
-/* Icono decorativo */
 .floral-icon {
   font-size: 1.8rem;
   color: var(--gold);
@@ -281,7 +277,6 @@ p {
   }
 }
 
-/* Responsive */
 @media (max-width: 650px) {
   h1 { font-size: 2rem; letter-spacing: 3px; }
   h2 { font-size: 1.6rem; }
@@ -292,27 +287,21 @@ p {
   .date-large { font-size: 1.1rem; letter-spacing: 4px; }
   .music-control { bottom: 18px; right: 18px; padding: 10px 16px; }
 }
-
-/* Animación sutil de corazones */
-@keyframes float {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-  100% { transform: translateY(-100px) rotate(20deg); opacity: 0; }
-}
 </style>
 </head>
 <body>
 
-<!-- BOTÓN DE MÚSICA - MEJORADO -->
+<!-- BOTÓN DE MÚSICA -->
 <div id="musicToggle" class="music-control">
   <i id="musicIcon" class="fas fa-music"></i>
   <span class="music-text" id="musicStatusText">Activar música</span>
 </div>
 
-<audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
-  <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0b1b5c1c2.mp3?filename=romantic-piano-142187.mp3" type="audio/mpeg">
+<audio id="bgAudio" loop preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_8b4c2c9b2c.mp3?filename=romantic-piano-185092.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ==================== PORTADA ==================== -->
+<!-- PORTADA -->
 <section class="section">
   <div class="bg" style="background-image:url('https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 25%;"></div>
   <div class="content">
@@ -322,16 +311,16 @@ p {
     <div class="divider"></div>
     <p class="date-large">02 · MAYO · 2026</p>
     <div class="countdown">
-      <div><span id="d">00</span><small>Días</small></div>
-      <div><span id="h">00</span><small>Horas</small></div>
-      <div><span id="m">00</span><small>Min</small></div>
-      <div><span id="s">00</span><small>Seg</small></div>
+      <div><span id="days">00</span><small>Días</small></div>
+      <div><span id="hours">00</span><small>Horas</small></div>
+      <div><span id="minutes">00</span><small>Min</small></div>
+      <div><span id="seconds">00</span><small>Seg</small></div>
     </div>
     <p style="margin-top: 20px; font-size:0.85rem; font-style:italic;">“El amor no mira con los ojos, sino con el alma” — Shakespeare</p>
   </div>
 </section>
 
-<!-- ==================== CEREMONIA ==================== -->
+<!-- CEREMONIA -->
 <section class="section">
   <div class="bg" style="background-image:url('https://images.pexels.com/photos/2962393/pexels-photo-2962393.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 35%;"></div>
   <div class="content">
@@ -348,7 +337,7 @@ p {
   </div>
 </section>
 
-<!-- ==================== RECEPCIÓN ==================== -->
+<!-- RECEPCIÓN -->
 <section class="section">
   <div class="bg" style="background-image:url('https://images.pexels.com/photos/2657560/pexels-photo-2657560.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 40%;"></div>
   <div class="content">
@@ -365,7 +354,7 @@ p {
   </div>
 </section>
 
-<!-- ==================== CONFIRMACIÓN + FRASES FINALES ==================== -->
+<!-- CONFIRMACIÓN -->
 <section class="section">
   <div class="bg" style="background-image:url('https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 50%;"></div>
   <div class="content">
@@ -378,51 +367,58 @@ p {
       <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
     </a>
     
-    <!-- Frase de cierre emotiva -->
-    <div style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.8; border-top: 1px solid rgba(228,179,99,0.3); padding-top: 1.2rem;">
-      <i class="fas fa-infinity"></i> “Y colorín colorado, este amor hasta la eternidad ha llegado”
+    <!-- Frase de cierre ELEGANTE (reemplaza la anterior) -->
+    <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.85; border-top: 1px solid rgba(228,179,99,0.3); padding-top: 1.2rem;">
+      <i class="fas fa-infinity"></i> “Y así, entre promesas y sueños, comienza la historia más hermosa”
     </div>
   </div>
 </section>
 
 <script>
-// ======================== COUNTDOWN ==========================
-const eventDate = new Date("May 2, 2026 17:00:00").getTime();
+// ======================== CUENTA REGRESIVA (CORREGIDA) ========================
 function updateCountdown() {
+  const eventDate = new Date("May 2, 2026 17:00:00").getTime();
   const now = new Date().getTime();
   const distance = eventDate - now;
+  
   if (distance < 0) {
-    document.getElementById("d").innerText = "0";
-    document.getElementById("h").innerText = "0";
-    document.getElementById("m").innerText = "0";
-    document.getElementById("s").innerText = "0";
+    document.getElementById("days").innerText = "0";
+    document.getElementById("hours").innerText = "0";
+    document.getElementById("minutes").innerText = "0";
+    document.getElementById("seconds").innerText = "0";
     return;
   }
+  
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (86400000)) / 3600000);
-  const mins = Math.floor((distance % 3600000) / 60000);
-  const secs = Math.floor((distance % 60000) / 1000);
-  document.getElementById("d").innerText = days;
-  document.getElementById("h").innerText = hours;
-  document.getElementById("m").innerText = mins;
-  document.getElementById("s").innerText = secs;
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
 }
+
+// Ejecutar inmediatamente y luego cada segundo
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ======================== MÚSICA FUNCIONAL ==================
+// ======================== MÚSICA (CORREGIDA - 100% FUNCIONAL) ========================
 const audio = document.getElementById('bgAudio');
 const musicToggle = document.getElementById('musicToggle');
 const musicIcon = document.getElementById('musicIcon');
 const musicStatusText = document.getElementById('musicStatusText');
 let isPlaying = false;
 
-// Configurar volumen
-audio.volume = 0.35;
+// Configurar el audio
+audio.volume = 0.3;
 audio.loop = true;
 
-// Función para iniciar música con interacción explícita
-function startMusic() {
+// Precargar el audio
+audio.load();
+
+function playMusic() {
   audio.play().then(() => {
     isPlaying = true;
     musicIcon.className = "fas fa-volume-up";
@@ -435,45 +431,37 @@ function startMusic() {
   });
 }
 
-function pauseMusic() {
+function stopMusic() {
   audio.pause();
   isPlaying = false;
   musicIcon.className = "fas fa-music";
   musicStatusText.innerText = "Activar música";
 }
 
-// Evento de clic en el botón de música
+// Evento click en el botón de música
 musicToggle.addEventListener('click', (e) => {
   e.stopPropagation();
   if (isPlaying) {
-    pauseMusic();
+    stopMusic();
   } else {
-    startMusic();
+    playMusic();
   }
 });
 
-// Intento automático al primer clic en cualquier parte (para evitar bloqueos del navegador)
-let musicInitialized = false;
-function firstInteractionHandler() {
-  if (!musicInitialized && !isPlaying) {
-    startMusic();
-    musicInitialized = true;
+// Al cargar la página, esperar la primera interacción del usuario
+let userInteracted = false;
+
+function onFirstInteraction() {
+  if (!userInteracted && !isPlaying) {
+    playMusic();
+    userInteracted = true;
   }
-  // Removemos los eventos después del primer intento para no interferir
-  document.removeEventListener('click', firstInteractionHandler);
-  document.removeEventListener('touchstart', firstInteractionHandler);
 }
 
-// Esperamos la primera interacción del usuario (normas de autoplay)
-document.addEventListener('click', firstInteractionHandler);
-document.addEventListener('touchstart', firstInteractionHandler);
+document.addEventListener('click', onFirstInteraction);
+document.addEventListener('touchstart', onFirstInteraction);
 
-// Precarga adicional para asegurar que el audio cargue
-window.addEventListener('load', () => {
-  audio.load();
-});
-
-// ======================== FRASES ROTATIVAS EXTRA ==================
+// ======================== FRASES ROTATIVAS ========================
 const lovePhrases = [
   "El amor verdadero no tiene final feliz, porque simplemente no tiene final.",
   "Contigo aprendí que el hogar no es un lugar, sino una persona.",
@@ -484,37 +472,20 @@ const lovePhrases = [
 
 let phraseIndex = 0;
 setInterval(() => {
-  const romanticElements = document.querySelectorAll('.romantic-phrase');
-  if (romanticElements.length > 0 && Math.random() > 0.65) {
-    const targetPhrase = romanticElements[0];
-    if (targetPhrase && !targetPhrase.closest('.section:first-child')) {
-      // Solo cambiamos suavemente frases secundarias para dar frescura
-      targetPhrase.style.transition = 'opacity 0.4s';
-      targetPhrase.style.opacity = '0.4';
+  const phraseElements = document.querySelectorAll('.romantic-phrase');
+  if (phraseElements.length > 0 && Math.random() > 0.7) {
+    const target = phraseElements[1] || phraseElements[0];
+    if (target) {
+      target.style.transition = 'opacity 0.3s';
+      target.style.opacity = '0.3';
       setTimeout(() => {
-        if (targetPhrase) {
-          targetPhrase.innerText = `«${lovePhrases[phraseIndex % lovePhrases.length]}»`;
-          targetPhrase.style.opacity = '1';
-          phraseIndex++;
-        }
+        target.innerText = `«${lovePhrases[phraseIndex % lovePhrases.length]}»`;
+        target.style.opacity = '1';
+        phraseIndex++;
       }, 200);
     }
   }
-}, 7000);
-
-// Efecto sutil de entrada para los contenidos
-const sections = document.querySelectorAll('.section');
-const observerOptions = { threshold: 0.3 };
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.querySelector('.content')?.style.animation = 'fadeUp 0.8s ease forwards';
-    }
-  });
-}, observerOptions);
-sections.forEach(s => observer.observe(s));
-
-console.log("✨ Invitación de bodas cargada - Azul y Dorado - Música funcional ✨");
+}, 8000);
 </script>
 </body>
 </html>

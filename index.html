@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Juan Carlos & Elizabeth · Nuestra Boda</title>
+<title>Nuestra Boda · Elizabeth & Juan Carlos</title>
 
 <!-- Google Fonts + Font Awesome -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -78,25 +78,47 @@ body {
   animation: fadeUp 1.2s ease forwards;
 }
 
-h1 {
+/* Título principal "Nuestra Boda" */
+.main-title {
   font-family: 'Cinzel', serif;
-  font-size: 3rem;
-  letter-spacing: 6px;
-  font-weight: 700;
-  text-shadow: 0 2px 15px rgba(0,0,0,0.5);
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  letter-spacing: 8px;
+  color: var(--gold-light);
+  font-weight: 400;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
 }
 
-h1 span {
+/* Nombres de los novios - más pequeños y con orden: novia primero */
+.names {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  letter-spacing: 4px;
+  font-weight: 600;
+  text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.names .bride {
   color: var(--gold);
-  font-weight: 800;
-  display: inline-block;
-  margin: 0 8px;
+  font-weight: 700;
+}
+
+.names .groom {
+  color: #fff;
+  font-weight: 600;
+}
+
+.names .ampersand {
+  color: var(--gold-light);
+  font-size: 1.8rem;
+  margin: 0 6px;
 }
 
 h2 {
   font-family: 'Cinzel', serif;
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: var(--gold);
   margin-bottom: 1.2rem;
   letter-spacing: 3px;
@@ -105,12 +127,12 @@ h2 {
 
 h2 i {
   margin-right: 12px;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 .romantic-phrase {
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   margin: 1.2rem 0;
   font-weight: 400;
   border-left: 3px solid var(--gold);
@@ -150,8 +172,8 @@ p {
 
 .date-large {
   margin-top: 1.2rem;
-  font-size: 1.5rem;
-  letter-spacing: 8px;
+  font-size: 1.4rem;
+  letter-spacing: 6px;
   color: var(--gold-light);
   font-family: 'Cinzel', serif;
   font-weight: 500;
@@ -260,7 +282,7 @@ p {
 }
 
 .floral-icon {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: var(--gold);
   opacity: 0.6;
   margin: 10px 0;
@@ -278,13 +300,15 @@ p {
 }
 
 @media (max-width: 650px) {
-  h1 { font-size: 2rem; letter-spacing: 3px; }
-  h2 { font-size: 1.6rem; }
+  .main-title { font-size: 1.2rem; letter-spacing: 5px; }
+  .names { font-size: 1.5rem; letter-spacing: 2px; }
+  .names .ampersand { font-size: 1.3rem; }
+  h2 { font-size: 1.5rem; }
   .countdown div { padding: 10px 14px; min-width: 70px; }
   .countdown span { font-size: 1.5rem; }
   .content { padding: 1.8rem; margin: 0 1rem; }
-  .romantic-phrase { font-size: 0.95rem; }
-  .date-large { font-size: 1.1rem; letter-spacing: 4px; }
+  .romantic-phrase { font-size: 0.9rem; }
+  .date-large { font-size: 1rem; letter-spacing: 4px; }
   .music-control { bottom: 18px; right: 18px; padding: 10px 16px; }
 }
 </style>
@@ -306,7 +330,12 @@ p {
   <div class="bg" style="background-image:url('https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1600'); background-position: center 25%;"></div>
   <div class="content">
     <div class="floral-icon"><i class="fas fa-feather-alt"></i></div>
-    <h1>Juan Carlos <span>&</span> Elizabeth</h1>
+    <div class="main-title">Nuestra Boda</div>
+    <div class="names">
+      <span class="bride">Elizabeth</span>
+      <span class="ampersand">&</span>
+      <span class="groom">Juan Carlos</span>
+    </div>
     <div class="romantic-phrase">«Y en medio de la rutina, encontré en tus ojos un eterno comienzo»</div>
     <div class="divider"></div>
     <p class="date-large">02 · MAYO · 2026</p>
@@ -367,7 +396,7 @@ p {
       <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
     </a>
     
-    <!-- Frase de cierre ELEGANTE (reemplaza la anterior) -->
+    <!-- Frase de cierre elegante -->
     <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.85; border-top: 1px solid rgba(228,179,99,0.3); padding-top: 1.2rem;">
       <i class="fas fa-infinity"></i> “Y así, entre promesas y sueños, comienza la historia más hermosa”
     </div>
@@ -375,7 +404,7 @@ p {
 </section>
 
 <script>
-// ======================== CUENTA REGRESIVA (CORREGIDA) ========================
+// ======================== CUENTA REGRESIVA ========================
 function updateCountdown() {
   const eventDate = new Date("May 2, 2026 17:00:00").getTime();
   const now = new Date().getTime();
@@ -400,22 +429,18 @@ function updateCountdown() {
   document.getElementById("seconds").innerText = seconds;
 }
 
-// Ejecutar inmediatamente y luego cada segundo
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ======================== MÚSICA (CORREGIDA - 100% FUNCIONAL) ========================
+// ======================== MÚSICA ========================
 const audio = document.getElementById('bgAudio');
 const musicToggle = document.getElementById('musicToggle');
 const musicIcon = document.getElementById('musicIcon');
 const musicStatusText = document.getElementById('musicStatusText');
 let isPlaying = false;
 
-// Configurar el audio
 audio.volume = 0.3;
 audio.loop = true;
-
-// Precargar el audio
 audio.load();
 
 function playMusic() {
@@ -424,7 +449,7 @@ function playMusic() {
     musicIcon.className = "fas fa-volume-up";
     musicStatusText.innerText = "Sonando ♫";
   }).catch((error) => {
-    console.log("Error al reproducir:", error);
+    console.log("Error:", error);
     isPlaying = false;
     musicIcon.className = "fas fa-music";
     musicStatusText.innerText = "Activar música";
@@ -438,7 +463,6 @@ function stopMusic() {
   musicStatusText.innerText = "Activar música";
 }
 
-// Evento click en el botón de música
 musicToggle.addEventListener('click', (e) => {
   e.stopPropagation();
   if (isPlaying) {
@@ -448,16 +472,13 @@ musicToggle.addEventListener('click', (e) => {
   }
 });
 
-// Al cargar la página, esperar la primera interacción del usuario
 let userInteracted = false;
-
 function onFirstInteraction() {
   if (!userInteracted && !isPlaying) {
     playMusic();
     userInteracted = true;
   }
 }
-
 document.addEventListener('click', onFirstInteraction);
 document.addEventListener('touchstart', onFirstInteraction);
 
